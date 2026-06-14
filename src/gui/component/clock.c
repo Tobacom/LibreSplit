@@ -113,6 +113,7 @@ static void timer_draw(LSComponent* self_, const ls_game* game, const ls_timer* 
     }
 
     remove_class(self->time, "delay");
+    remove_class(self->time, "offset");
     remove_class(self->time, "behind");
     remove_class(self->time, "losing");
     remove_class(self->time, "best-split");
@@ -122,6 +123,8 @@ static void timer_draw(LSComponent* self_, const ls_game* game, const ls_timer* 
     }
     if (ls_timer_get_time(timer, true) <= 0) {
         add_class(self->time, "delay");
+    } else if (timer->started == 0 && ls_timer_get_time(timer, true) == game->start_offset) {
+    	add_class(self->time, "offset");
     } else {
         if (timer->curr_split == game->split_count
             && timer->split_info[curr]
