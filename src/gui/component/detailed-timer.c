@@ -177,7 +177,6 @@ static void detailed_timer_draw(LSComponent* self_, const ls_game* game, const l
     }
 
     remove_class(self->time, "delay");
-    remove_class(self->time, "offset");
     remove_class(self->time, "behind");
     remove_class(self->time, "losing");
     remove_class(self->time, "best-split");
