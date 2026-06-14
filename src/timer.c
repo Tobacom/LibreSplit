@@ -343,6 +343,12 @@ int ls_game_create(ls_game** game_ptr, const char* path, char** error_msg)
     if (ref) {
         game->height = json_integer_value(ref);
     }
+    // get offset
+    ref = json_object_get(json, "start_offset");
+    if (ref) {
+        game->start_offset = ls_time_value(
+            json_string_value(ref));
+    }
     // get delay
     ref = json_object_get(json, "start_delay");
     if (ref) {
@@ -561,6 +567,10 @@ int ls_game_save(const ls_game* game)
         ls_time_string_serialized(str, game->world_record);
         json_object_set_new(json, "world_record", json_string(str));
     }
+    if (game->start_offset) {
+        ls_time_string_serialized(str, game->start_offset);
+        json_object_set_new(json, "start_offset", json_string(str));
+    }
     if (game->start_delay) {
         ls_time_string_serialized(str, game->start_delay);
         json_object_set_new(json, "start_delay", json_string(str));
@@ -743,7 +753,11 @@ static void reset_timer(ls_timer* timer)
     timer->running = 0;
     atomic_store(&run_running, false);
     timer->curr_split = 0;
-    timer->realTime = -timer->game->start_delay; // Start delay only applies to real time only
+    if (timer->game->start_offset) {
+    	timer->realTime = timer->game->start_offset; // Tobacom: Offset has priority over delay ig (you can't use both at the same time, don't know how to resolve this properly)
+    } else {
+    	timer->realTime = -timer->game->start_delay; // Start delay only applies to real time only
+    }
     timer->gameTime = 0;
     timer->usingGameTime = false;
     timer->loading = false;

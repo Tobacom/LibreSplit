@@ -10,6 +10,7 @@ You can use splits located in [the resource repository](https://github.com/Libre
 | --------------- | ------------------ | --------------------------------------- |
 | `title`         | string             | Title string at top of window           |
 | `attempt_count` | int                | Number of attempts                      |
+| `start_offset`  | string (timestamp) | Time at which the timer will start      |
 | `start_delay`   | string (timestamp) | Non-negative delay until timer starts   |
 | `world_record`  | string             | Best known time                         |
 | `splits`        | array              | Array of [split objects](#split-object) |

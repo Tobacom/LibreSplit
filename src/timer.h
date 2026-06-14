@@ -21,6 +21,7 @@ typedef struct ls_game {
     int width;
     int height;
     long long world_record;
+    long long start_offset;
     long long start_delay;
     char** split_titles;
     char** split_icon_paths; // null if no icons
