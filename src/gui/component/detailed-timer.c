@@ -185,10 +185,9 @@ static void detailed_timer_draw(LSComponent* self_, const ls_game* game, const l
     if (curr == game->split_count) {
         curr = game->split_count - 1;
     }
-    if (ls_timer_get_time(timer, true) <= 0) {
+    if (ls_timer_get_time(timer, true) <= 0
+        || (timer->started == 0 && ls_timer_get_time(timer, true) == game->start_offset)) {
         add_class(self->time, "delay");
-    } else if (timer->started == 0 && ls_timer_get_time(timer, true) == game->start_offset) {
-        add_class(self->time, "offset");
     } else {
         if (timer->curr_split == game->split_count
             && timer->split_info[curr]
