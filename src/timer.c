@@ -754,9 +754,9 @@ static void reset_timer(ls_timer* timer)
     atomic_store(&run_running, false);
     timer->curr_split = 0;
     if (timer->game->start_offset) {
-    	timer->realTime = timer->game->start_offset; // Tobacom: Offset has priority over delay ig (you can't use both at the same time, don't know how to resolve this properly)
+        timer->realTime = timer->game->start_offset; // Tobacom: Offset has priority over delay ig (you can't use both at the same time, don't know how to resolve this properly)
     } else {
-    	timer->realTime = -timer->game->start_delay; // Start delay only applies to real time only
+        timer->realTime = -timer->game->start_delay; // Start delay only applies to real time only
     }
     timer->gameTime = 0;
     timer->usingGameTime = false;
